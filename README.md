@@ -1,4 +1,7 @@
 WCF Console App
 
-In this project, it is demonstrated a client-server communication between console apps, implemented through Windows Communication Foundation (WCF). In the project, authentification and authorization functionalities 
- are implemented, as well as dependency injection principles, using interfaces. The project also contains one more specific kind of client: the Replicator. The replicator replicates data from one server to another one in a certain period, thus simulating the failure resistance of the server.  
+This project demonstrates client–server communication between console applications implemented using Windows Communication Foundation (WCF).
+
+It includes authentication and authorization mechanisms, as well as dependency injection through the use of interfaces.
+
+In addition to the standard client, the project features a specialized client called the Replicator. The Replicator periodically replicates data from one server to another, simulating server fault tolerance and ensuring system resilience in case of failure.
