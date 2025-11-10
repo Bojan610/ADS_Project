@@ -13,145 +13,147 @@ namespace Klijent
     {
         static void Main(string[] args)
         {
-            ChannelFactory<IBezbednosniMehanizmi> factory1 = new ChannelFactory<IBezbednosniMehanizmi>("Bezbednost");
-            IBezbednosniMehanizmi proxy1 = factory1.CreateChannel();
+            ChannelFactory<ISecurityMechanisms> factory1 = new ChannelFactory<ISecurityMechanisms>("Security");
+            ISecurityMechanisms proxy1 = factory1.CreateChannel();
             string token = "";
 
-            try
-            {
-                Console.WriteLine("Unesite korisnicko ime:");
-                string username = Console.ReadLine();
-                Console.WriteLine("Unesite lozinku:");
-                string password = Console.ReadLine();
-                token = proxy1.Autentifikacija(username, password);
-            }
-            catch (FaultException<BezbednosniIzuzetak> iz)
-            {
-                Console.WriteLine(iz.Detail.Razlog);
-            }
-
-
-            ChannelFactory<IBiblioteka> factory = new ChannelFactory<IBiblioteka>("Biblioteka");
-            IBiblioteka proxy = factory.CreateChannel();            Clan clan;
+            
+                try
+                {
+                    Console.WriteLine("Enter username:");
+                    string username = Console.ReadLine();
+                    Console.WriteLine("Enter password:");
+                    string password = Console.ReadLine();
+                    token = proxy1.Authentification(username, password);
+                }
+                catch (FaultException<SecurityException> iz)
+                {
+                    Console.WriteLine(iz.Detail.Reason);
+                }
+            
+           
+            Console.WriteLine("Succes login!");
+            ChannelFactory<ILibrary> factory = new ChannelFactory<ILibrary>("Library");
+            ILibrary proxy = factory.CreateChannel();            Member member;
 
             while (true)
             {
-                //dodavanje clana
+                //adding the member
                 try
                 {
-                    clan = new Clan("Bojan", "Brdarevic", 0000);
-                    proxy.DodajClana(token, clan);
-                    Console.WriteLine("Clan " + clan.Ime + " uspesno dodat.");
+                    member = new Member("Bojan", "Brdarevic", 0000);
+                    proxy.AddMember(token, member);
+                    Console.WriteLine("Member " + member.Firstname + " successfully added.");
                 }
-                catch (FaultException<BibliotekaIzuzetak> iz)
+                catch (FaultException<LibraryException> iz)
                 {
-                    Console.WriteLine(iz.Detail.Razlog);
+                    Console.WriteLine(iz.Detail.Reason);
                 }
-                catch (FaultException<BezbednosniIzuzetak> biz)
+                catch (FaultException<SecurityException> biz)
                 {
-                    Console.WriteLine(biz.Detail.Razlog);
+                    Console.WriteLine(biz.Detail.Reason);
                 }
 
                 try
                 {
-                    clan = new Clan("Bojan", "Brdarevic", 0000);
-                    proxy.DodajClana(token, clan);
-                    Console.WriteLine("Clan " + clan.Ime + " uspesno dodat.");
+                    member = new Member("Bojan", "Brdarevic", 0000);
+                    proxy.AddMember(token, member);
+                    Console.WriteLine("Member " + member.Firstname + " successfully added.");
                 }
-                catch (FaultException<BibliotekaIzuzetak> iz)
+                catch (FaultException<LibraryException> iz)
                 {
-                    Console.WriteLine(iz.Detail.Razlog);
+                    Console.WriteLine(iz.Detail.Reason);
                 }
-                catch (FaultException<BezbednosniIzuzetak> biz)
+                catch (FaultException<SecurityException> biz)
                 {
-                    Console.WriteLine(biz.Detail.Razlog);
-                }
-
-                //dodavanje knjiga clanu
-                try
-                {
-                    proxy.DodajKnjiguClanu(token, 0000, "Na drini cuprija", "Mali princ", "Uspeh, sto da ne");
-                    Console.WriteLine("Uspesno dodavanje knjiga clanu.");
-                }
-                catch (FaultException<BibliotekaIzuzetak> iz)
-                {
-                    Console.WriteLine(iz.Detail.Razlog);
-                }
-                catch (FaultException<BezbednosniIzuzetak> biz)
-                {
-                    Console.WriteLine(biz.Detail.Razlog);
+                    Console.WriteLine(biz.Detail.Reason);
                 }
 
+                //adding books to the member 
                 try
                 {
-                    proxy.DodajKnjiguClanu(token, 1111, "Na drini cuprija", "Mali princ", "Uspeh, sto da ne");
-                    Console.WriteLine("Uspesno dodavanje knjiga clanu.");
+                    proxy.AddBookToMember(token, 0000, "Na drini cuprija", "Mali princ", "Uspeh, sto da ne");
+                    Console.WriteLine("Books added successfully to the member.");
                 }
-                catch (FaultException<BibliotekaIzuzetak> iz)
+                catch (FaultException<LibraryException> iz)
                 {
-                    Console.WriteLine(iz.Detail.Razlog);
+                    Console.WriteLine(iz.Detail.Reason);
                 }
-                catch (FaultException<BezbednosniIzuzetak> biz)
+                catch (FaultException<SecurityException> biz)
                 {
-                    Console.WriteLine(biz.Detail.Razlog);
+                    Console.WriteLine(biz.Detail.Reason);
+                }
+
+                try
+                {
+                    proxy.AddBookToMember(token, 1111, "Na drini cuprija", "Mali princ", "Uspeh, sto da ne");
+                    Console.WriteLine("Books added successfully to the member.");
+                }
+                catch (FaultException<LibraryException> iz)
+                {
+                    Console.WriteLine(iz.Detail.Reason);
+                }
+                catch (FaultException<SecurityException> biz)
+                {
+                    Console.WriteLine(biz.Detail.Reason);
                 }
 
                 //dobavi clana
                 try
                 {
-                    proxy.DobaviClana(token, 0000, out clan);
-                    Console.WriteLine("Clan uspesno dobavljen:\n" + clan.ToString());
+                    proxy.GetMember(token, 0000, out member);
+                    Console.WriteLine("The member successfuly retrieved:\n" + member.ToString());
                 }
-                catch (FaultException<BibliotekaIzuzetak> iz)
+                catch (FaultException<LibraryException> iz)
                 {
-                    Console.WriteLine(iz.Detail.Razlog);
+                    Console.WriteLine(iz.Detail.Reason);
                 }
-                catch (FaultException<BezbednosniIzuzetak> biz)
+                catch (FaultException<SecurityException> biz)
                 {
-                    Console.WriteLine(biz.Detail.Razlog);
+                    Console.WriteLine(biz.Detail.Reason);
                 }
 
                 try
                 {
-                    proxy.DobaviClana(token, 1111, out clan);
-                    Console.WriteLine("Clan uspesno dobavljen:\n" + clan.ToString());
+                    proxy.GetMember(token, 1111, out member);
+                    Console.WriteLine("The member successfuly retrieved:\n" + member.ToString());
                 }
-                catch (FaultException<BibliotekaIzuzetak> iz)
+                catch (FaultException<LibraryException> iz)
                 {
-                    Console.WriteLine(iz.Detail.Razlog);
+                    Console.WriteLine(iz.Detail.Reason);
                 }
-                catch (FaultException<BezbednosniIzuzetak> biz)
+                catch (FaultException<SecurityException> biz)
                 {
-                    Console.WriteLine(biz.Detail.Razlog);
+                    Console.WriteLine(biz.Detail.Reason);
                 }
 
                 //obrisi knjigu clanu
                 try
                 {
-                    proxy.ObrisiKnjiguClanu(token, 0000, "Na drini cuprija", "Uspeh, sto da ne");
-                    Console.WriteLine("Uspeno brisanje knjiga clanu.");
+                    proxy.RemoveBookFromMember(token, 0000, "Na drini cuprija", "Uspeh, sto da ne");
+                    Console.WriteLine("Books successfully removed from the member.");
                 }
-                catch (FaultException<BibliotekaIzuzetak> iz)
+                catch (FaultException<LibraryException> iz)
                 {
-                    Console.WriteLine(iz.Detail.Razlog);
+                    Console.WriteLine(iz.Detail.Reason);
                 }
-                catch (FaultException<BezbednosniIzuzetak> biz)
+                catch (FaultException<SecurityException> biz)
                 {
-                    Console.WriteLine(biz.Detail.Razlog);
+                    Console.WriteLine(biz.Detail.Reason);
                 }
 
                 //svi clanovi
                 try
                 {
-                    Console.WriteLine("Spisak svih clanova:\n");
-                    foreach (Clan item in proxy.SviClanovi(token))
+                    Console.WriteLine("List of all members:\n");
+                    foreach (Member item in proxy.GetAllMembers(token))
                     {
                         Console.WriteLine(item.ToString());
                     }
                 }
-                catch (FaultException<BezbednosniIzuzetak> biz)
+                catch (FaultException<SecurityException> biz)
                 {
-                    Console.WriteLine(biz.Detail.Razlog);
+                    Console.WriteLine(biz.Detail.Reason);
                 }
 
                 Thread.Sleep(3000);

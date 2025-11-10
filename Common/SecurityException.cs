@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace Common
 {
     [DataContract]
-    public class BibliotekaIzuzetak
+    public class SecurityException
     {
-        private string razlog;
+        private string reason;
 
         [DataMember]
-        public string Razlog { get => razlog; set => razlog = value; }
+        public string Reason { get => reason; set => reason = value; }
     }
 }

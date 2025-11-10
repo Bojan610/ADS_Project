@@ -11,10 +11,10 @@ namespace Servis
     {
         static void Main(string[] args)
         {
-            ServiceHost svc = new ServiceHost(typeof(Biblioteka));
+            ServiceHost svc = new ServiceHost(typeof(Library));
             svc.Open();
 
-            Console.WriteLine("Server supesno pokrenut. Pritisnite [Enter] za zaustavljanje servisa.");
+            Console.WriteLine("The service started successfully. Press [Enter] to stop this service.");
 
             Console.ReadLine();            svc.Close();
         }

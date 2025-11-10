@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Servis
 {
-    class BazaPodataka
+    class Database
     {
-        public static Dictionary<long, Clan> clanovi = new Dictionary<long, Clan>();
+        public static Dictionary<long, Member> members = new Dictionary<long, Member>();
     }
 }

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace Common
 {
     [ServiceContract]
-    public interface IBezbednosniMehanizmi
+    public interface ISecurityMechanisms
     {
         [OperationContract]
-        [FaultContract(typeof(BezbednosniIzuzetak))]
-        string Autentifikacija(string korisnik, string lozinka);
+        [FaultContract(typeof(SecurityException))]
+        string Authentification(string username, string password);
     }
 }

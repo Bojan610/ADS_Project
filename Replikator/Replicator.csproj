@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BAEC5646-E0A3-4BB0-BF78-E89037E24F53}</ProjectGuid>
+    <ProjectGuid>{FFAD6CBC-D218-4D58-8AB2-3D6F17553BC6}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Servis</RootNamespace>
-    <AssemblyName>Servis</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>Replikator</RootNamespace>
+    <AssemblyName>Replikator</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -44,10 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BazaPodataka.cs" />
-    <Compile Include="Biblioteka.cs" />
-    <Compile Include="DirektorijumKorisnika.cs" />
-    <Compile Include="Korisnik.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

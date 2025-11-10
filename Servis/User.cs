@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Servis
 {
-    class Korisnik
+    class User
     {
         string username;
         string password;
-        bool autentifikovan = false;
+        bool authentificated = false;
         string token;
 
-        public Korisnik(string username, string password)
+        public User(string username, string password)
         {
             this.username = username;
             this.password = password;
@@ -21,10 +21,10 @@ namespace Servis
 
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }
-        public bool Autentifikovan
+        public bool Authentificated
         {
-            get => autentifikovan;
-            set => autentifikovan = value;
+            get => authentificated;
+            set => authentificated = value;
         }
         public string Token { get => token; set => token = value; }
 

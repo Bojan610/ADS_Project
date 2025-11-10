@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Common</RootNamespace>
     <AssemblyName>Common</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,11 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BezbednosniIzuzetak.cs" />
-    <Compile Include="BibliotekaIzuzetak.cs" />
-    <Compile Include="Clan.cs" />
-    <Compile Include="IBezbednosniMehanizmi.cs" />
-    <Compile Include="IBiblioteka.cs" />
+    <Compile Include="SecurityException.cs" />
+    <Compile Include="LibraryException.cs" />
+    <Compile Include="Member.cs" />
+    <Compile Include="ISecurityMechanisms.cs" />
+    <Compile Include="ILibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
