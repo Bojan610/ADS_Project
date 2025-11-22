@@ -66,7 +66,7 @@ namespace Servis
             else
             {
                 SecurityException iz = new SecurityException();
-                iz.Reason = "Wrong username and/or password.";
+                iz.Reason = "Invalid username or password.\n";
                 throw new FaultException<SecurityException>(iz);
             }
         }
@@ -78,7 +78,7 @@ namespace Servis
             else
             {
                 SecurityException iz = new SecurityException();
-                iz.Reason = "User is not authentificated.";
+                iz.Reason = "\nUser is not authentificated.";
                 throw new FaultException<SecurityException>(iz);
             }
         }
@@ -89,7 +89,7 @@ namespace Servis
             else
             {
                 SecurityException iz = new SecurityException();
-                iz.Reason = "User is not authorized for this action.";
+                iz.Reason = "\nUser is not authorized for this action.";
                 throw new FaultException<SecurityException>(iz);
             }
         }

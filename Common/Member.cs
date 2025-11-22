@@ -44,14 +44,28 @@ namespace Common
 
         public override string ToString()
         {
-            string ret = "";
-            ret += $"{Firstname} {Lastname}, {Jmbg}, list of books:\n";
-            foreach (string item in books)
-            {
-                ret += $"{item}\n";
-            }
+            var sb = new StringBuilder();
+            int counter = 1;
 
-            return ret;
+            sb.AppendLine($"{Firstname} {Lastname}");
+            sb.AppendLine($"JMBG: {Jmbg}");
+            sb.AppendLine("Books:");
+
+            if (books.Count > 0)
+            {
+                foreach (var book in books)
+                {
+                    sb.AppendLine($"   {counter}. {book}");
+                    counter++;
+                }
+            }
+            else
+            {
+                sb.AppendLine("The member does not contain any books");
+            }
+           
+
+            return sb.ToString();
         }
     }
 }

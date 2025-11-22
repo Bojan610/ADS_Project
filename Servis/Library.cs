@@ -30,7 +30,7 @@ namespace Servis
             else
             {
                 LibraryException iz = new LibraryException();
-                iz.Reason = "Failed to get member. Member does not exist.";
+                iz.Reason = "\nFailed to get member. Member does not exist.";
                 throw new FaultException<LibraryException>(iz);
             }
         }
@@ -45,7 +45,7 @@ namespace Servis
             else
             {
                 LibraryException iz = new LibraryException();
-                iz.Reason = "Failed to add member. Member already exists.";
+                iz.Reason = "\nFailed to add member. Member already exists.";
                 throw new FaultException<LibraryException>(iz);
             }
         }
@@ -66,7 +66,7 @@ namespace Servis
             else
             {
                 LibraryException iz = new LibraryException();
-                iz.Reason = "Failed to add books to the member. Member does not exist.";
+                iz.Reason = "\nFailed to add books to the member. Member does not exist.";
                 throw new FaultException<LibraryException>(iz);
             }
         }
@@ -81,7 +81,7 @@ namespace Servis
             else
             {
                 LibraryException iz = new LibraryException();
-                iz.Reason = "Failed to remove member. Member does not exist.";
+                iz.Reason = "\nFailed to remove member. Member does not exist.";
                 throw new FaultException<LibraryException>(iz);
             }
         }
@@ -92,32 +92,32 @@ namespace Servis
             userRepository.UserAuthorized(token, EAccessMode.Write);
 
             if (Database.members.ContainsKey(member.Jmbg))
-                Database.members[member.Jmbg] = member;
+            {
+                Database.members[member.Jmbg].Firstname = member.Firstname;
+                Database.members[member.Jmbg].Lastname = member.Lastname;
+            }    
             else
             {
                 LibraryException iz = new LibraryException();
-                iz.Reason = "Failed to modify member. Member does not exist.";
+                iz.Reason = "\nFailed to modify member. Member does not exist.";
                 throw new FaultException<LibraryException>(iz);
             }
         }
 
-        public bool RemoveBookFromMember(string token, long jmbg, params string[] books)
+        public bool RemoveBookFromMember(string token, long jmbg, int bookNum)
         {
             userRepository.UserAuthentificated(token);
             userRepository.UserAuthorized(token, EAccessMode.Write);
 
             if (Database.members.ContainsKey(jmbg))
-            {
-                foreach (string item in books)
-                {
-                    Database.members[jmbg].Books.Remove(item);
-                }
+            {       
+                Database.members[jmbg].Books.RemoveAt(bookNum - 1);              
                 return true;
             }
             else
             {
                 LibraryException iz = new LibraryException();
-                iz.Reason = "Failed to remove books from the member. Member does not exist.";
+                iz.Reason = "\nFailed to remove books from the member. Member does not exist.";
                 throw new FaultException<LibraryException>(iz);
             }
         }

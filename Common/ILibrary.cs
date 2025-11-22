@@ -42,7 +42,7 @@ namespace Common
         [OperationContract]
         [FaultContract(typeof(LibraryException))]
         [FaultContract(typeof(SecurityException))]
-        bool RemoveBookFromMember(string token, long jmbg, params string[] books);
+        bool RemoveBookFromMember(string token, long jmbg, int bookNum);
 
         [OperationContract]
         [FaultContract(typeof(SecurityException))]
