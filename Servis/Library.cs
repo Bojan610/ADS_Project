@@ -61,6 +61,7 @@ namespace Servis
                 {
                     Database.members[jmbg].Books.Add(item);
                 }
+                Database.members[jmbg].ModifyTime = DateTime.Now;
                 return true;
             }
             else
@@ -95,6 +96,7 @@ namespace Servis
             {
                 Database.members[member.Jmbg].Firstname = member.Firstname;
                 Database.members[member.Jmbg].Lastname = member.Lastname;
+                Database.members[member.Jmbg].ModifyTime = DateTime.Now;
             }    
             else
             {
@@ -111,7 +113,8 @@ namespace Servis
 
             if (Database.members.ContainsKey(jmbg))
             {       
-                Database.members[jmbg].Books.RemoveAt(bookNum - 1);              
+                Database.members[jmbg].Books.RemoveAt(bookNum - 1);
+                Database.members[jmbg].ModifyTime = DateTime.Now;
                 return true;
             }
             else
@@ -147,7 +150,7 @@ namespace Servis
             Database.members = members;
         }
 
-        public Dictionary<long, Member> ReadDatabase(string token, DateTime vreme)
+        public Dictionary<long, Member> ReadDatabase(string token, DateTime time)
         {
             userRepository.UserAuthentificated(token);
             userRepository.UserAuthorized(token, EAccessMode.Sync);
@@ -156,7 +159,7 @@ namespace Servis
             Dictionary<long, Member> retDic = new Dictionary<long, Member>();
             foreach (Member item in Database.members.Values)
             {
-                if (item.ModifyTime >= vreme)
+                if (item.ModifyTime >= time)
                     retDic.Add(item.Jmbg, item);
             }
 

@@ -236,8 +236,7 @@ namespace Klijent
 
             try
             {
-                Member member = new Member();
-                proxyLibrary.GetMember(token, jmbg, out member);
+                proxyLibrary.GetMember(token, jmbg, out Member member);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\nThe member successfuly retrieved:");
                 Console.ResetColor();
